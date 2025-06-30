@@ -1,10 +1,13 @@
 <?php
 
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('customer.index');
+    return redirect()->route('home');
 });
+
+Route::get('/Home', [ProductController::class, 'index'])->name('home');
 
 Route::prefix('delivery')->group(function () {
     Route::get('/', function () {

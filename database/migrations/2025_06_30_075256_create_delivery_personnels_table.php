@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('delivery_personnel', function (Blueprint $table) {
+        Schema::create('delivery_personnels', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('restrict');
             $table->string('name'); // Name of the delivery personnel

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('customer_id')->constrained('users')->onDelete('set null');
             $table->foreignId('product_id')->constrained('products')->onDelete('restrict');
-            $table->foreignId('delivery_personnel_id')->constrained('delivery_personnel')->onDelete('restrict');
+            $table->foreignId('delivery_personnel_id')->constrained('delivery_personnels')->onDelete('restrict');
             $table->unsignedInteger('quantity');
             $table->decimal('total_price', 10, 2);
             $table->enum('status', ['delivered', 'returned', 'cancelled', 'in_transit'])->default('in_transit');

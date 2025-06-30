@@ -21,4 +21,9 @@ class Product extends Model
         'barcode',
         'expiry_date'
     ];
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
 }
