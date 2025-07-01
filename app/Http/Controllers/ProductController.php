@@ -20,7 +20,7 @@ class ProductController extends Controller
         $cacheKey = 'product:' . $title . ':' . ':page:' . $request->input('page', 1);
 
         $products = Cache::remember($cacheKey, 10, function () use ($products) {
-            return $products->paginate(10);
+            return $products->paginate(32);
         });
 
         return view('customer.index', compact('products'));
