@@ -88,7 +88,7 @@
                                     ${{ number_format($subtotal == 0 ? $item->product->price : $subtotal, 2) }}
                                 </td>
                                 <td class="py-3 px-6 text-center">
-                                    <form action="#" method="POST">
+                                    <form action="{{ route('cart.remove', $item) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button 

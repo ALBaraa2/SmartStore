@@ -25,4 +25,4 @@ Route::prefix('admin')->group(function () {
 });
 
 Route::get('/cart', [CartController::class, 'viewCart'])->name('cart.view');
-
+Route::delete('/cart/{cart}', [CartController::class, 'remove'])->name('cart.remove');
