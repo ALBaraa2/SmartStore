@@ -7,6 +7,8 @@ use App\Models\Order;
 use App\Models\Payment;
 use App\Models\Product;
 use App\Models\User;
+use App\Models\Cart;
+
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -31,5 +33,8 @@ class DatabaseSeeder extends Seeder
 
         // Generate Payments
         Payment::factory(15)->create();
+
+        // Generate Cart Items
+        Cart::factory(20)->create();
     }
 }
