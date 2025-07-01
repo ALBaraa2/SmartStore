@@ -24,8 +24,14 @@
     <main>
         @yield('content')
     </main>
-    <footer>
-        <p>&copy; 2025 Your Store</p>
+    <footer class="bg-gradient-to-r from-blue-600 to-purple-700 text-white py-6 mt-10">
+        <div class="container mx-auto text-center">
+            <p class="text-lg font-semibold">&copy; 2025 Your Store. All Rights Reserved.</p>
+            <p class="text-sm mt-2">
+                Made with ❤️ by 
+                <a href="#" class="text-yellow-300 hover:text-yellow-400 underline">Your Team</a>
+            </p>
+        </div>
     </footer>
 </body>
 </html>
