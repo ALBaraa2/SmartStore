@@ -9,6 +9,8 @@ Route::get('/', function () {
 
 Route::get('/Home', [ProductController::class, 'index'])->name('home');
 
+Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
+
 Route::prefix('delivery')->group(function () {
     Route::get('/', function () {
         return view('delivery.index');

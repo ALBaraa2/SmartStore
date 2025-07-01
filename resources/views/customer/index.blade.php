@@ -22,7 +22,7 @@
                             <h2 class="text-lg font-semibold text-gray-800 truncate mb-2">{{ $product->name }}</h2>
                             <p class="text-gray-600 text-sm line-clamp-2 mb-4">{{ $product->description }}</p>
                             <p class="text-green-500 font-bold text-lg mb-4">${{ number_format($product->price, 2) }}</p>
-                            <a href="/products/{{ $product->id }}" class="block text-center bg-blue-500 text-white font-medium py-2 rounded hover:bg-blue-600 transition-colors duration-200">
+                            <a href="{{ route('products.show', $product) }}" class="block text-center bg-blue-500 text-white font-medium py-2 rounded hover:bg-blue-600 transition-colors duration-200">
                                 View Details
                             </a>
                         </div>
