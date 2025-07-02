@@ -7,7 +7,7 @@
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
+<body class="flex flex-col min-h-screen">
     <header>
         @if (Auth::guest())
             @include('layouts.customer-navbar')
@@ -21,11 +21,11 @@
             @endif
         @endif
     </header>
-    <main>
+    <main class="flex-grow">
         @include('alert')
         @yield('content')
     </main>
-    <footer class="bg-gray-800 text-white py-6 mt-10">
+    <footer class="bg-gray-800 text-white py-6">
         <div class="container mx-auto text-center">
             <p class="text-lg font-semibold">&copy; 2025 Your Store. All Rights Reserved.</p>
             <p class="text-sm mt-2">

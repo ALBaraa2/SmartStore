@@ -13,23 +13,27 @@ class CartController extends Controller
      */
     public function viewCart()
     {
-        $cartItrems = Cart::with(['customer', 'product'])->where('customer_id', auth()->user()->id)->get();
+        if (!auth()->check()) {
+            return view('customer.cart.view')->with('error', 'Please log in to add items to your cart.');
+        } else {
+            $cartItrems = Cart::with(['customer', 'product'])->where('customer_id', auth()->user()->id)->get();
 
-        if ($cartItrems->isEmpty()) {
+            if ($cartItrems->isEmpty()) {
+                return view('customer.cart.view', [
+                    'cartItems' => [],
+                ])->with('info', 'Your cart is empty.');
+            }
+            $totalPrice = 0;
+
+            foreach ($cartItrems as $item) {
+                $totalPrice += $item->product->price;
+            }
+
             return view('customer.cart.view', [
-                'cartItems' => [],
-            ])->with('info', 'Your cart is empty.');
+                'cartItems' => $cartItrems,
+                'totalPrice' => $totalPrice,
+            ]);
         }
-        $totalPrice = 0;
-
-        foreach ($cartItrems as $item) {
-            $totalPrice += $item->product->price;
-        }
-
-        return view('customer.cart.view', [
-            'cartItems' => $cartItrems,
-            'totalPrice' => $totalPrice,
-        ]);
     }
 
     /**
