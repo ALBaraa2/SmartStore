@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use Illuminate\Support\Facades\Cache;
@@ -28,6 +29,11 @@ class ProductController extends Controller
 
     public function show(Product $product)
     {
-        return view('products.show', compact('product'));
+        $user = 7;
+        $user = User::findOrFail($user); //This is for testing purposes, replace with auth()->user() in production
+        // dd($product->id);
+        // $inCart = auth()->check() ? auth()->user()->cart->contains('product_id', $product->id) : false;
+        $inCart = $user->cartItems()->where('product_id', $product->id)->exists();
+        return view('products.show', compact('product', 'inCart'));
     }
 }
