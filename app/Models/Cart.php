@@ -9,6 +9,8 @@ class Cart extends Model
 {
     use HasFactory;
 
+    public $incrementing = false; // Disable auto-incrementing for composite primary key
+
     protected $fillable = [
         'customer_id',
         'product_id',

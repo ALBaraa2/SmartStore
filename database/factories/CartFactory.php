@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use GuzzleHttp\Promise\Create;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\User;
 use App\Models\Product;
@@ -19,8 +20,8 @@ class CartFactory extends Factory
     public function definition(): array
     {
         return [
-            'customer_id' => User::factory()->create(['role' => 'customer']),
-            'product_id' => Product::factory(),
+            'customer_id' => User::factory()->create(['role' => 'customer'])->id,
+            'product_id' => Product::factory()->create()->id,
         ];
     }
 }

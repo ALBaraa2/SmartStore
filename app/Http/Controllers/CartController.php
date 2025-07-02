@@ -75,9 +75,17 @@ class CartController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function remove(Cart $cart)
+    public function remove(Request $request)
     {
-        $cart->delete();
+        $request->validate([
+            'customer_id' => 'required|integer',
+            'product_id' => 'required|integer',
+        ]);
+
+        Cart::where('customer_id', $request->customer_id)
+            ->where('product_id', $request->product_id)
+            ->delete();
+
 
         return redirect()->route('cart.view')->with('success', 'Item removed from cart successfully.');
     }
