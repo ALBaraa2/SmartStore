@@ -53,15 +53,21 @@
                     <!-- Purchase Button -->
                     @if ($inCart)
                         <div class="mt-6">
-                            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg shadow-sm" role="alert">
-                                <span class="font-semibold">Great choice!</span> You've already added this product to your cart.
+                            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg shadow-sm mb-4" role="alert">
+                                <span class="font-semibold">Great choice!</span> This product is already in your cart.
                             </div>
+
+                            <a href="{{ route('cart.view') }}"
+                            class="inline-block w-full text-center bg-gray-500 hover:bg-green-600 text-white font-semibold py-3 rounded-lg shadow-md transition duration-300">
+                                View Your Cart
+                            </a>
                         </div>
                     @else
                         <div class="mt-6">
                             <form action="{{ route('cart.add', $product) }}" method="POST">
                                 @csrf
-                                <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 rounded-lg shadow-md transition-all duration-300">
+                                <button type="submit"
+                                        class="w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 rounded-lg shadow-md transition duration-300">
                                     Add to Cart
                                 </button>
                             </form>
