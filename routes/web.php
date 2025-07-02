@@ -26,3 +26,4 @@ Route::prefix('admin')->group(function () {
 
 Route::get('/cart', [CartController::class, 'viewCart'])->name('cart.view');
 Route::delete('/cart/{cart}', [CartController::class, 'remove'])->name('cart.remove');
+Route::post('/cart/{product:name}', [CartController::class, 'add'])->name('cart.add');

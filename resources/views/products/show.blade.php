@@ -52,7 +52,7 @@
 
                     <!-- Purchase Button -->
                     <div class="mt-6">
-                        <form action="#" method="POST">
+                        <form action="{{ route('cart.add', $product) }}" method="POST">
                             @csrf
                             <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 rounded-lg shadow-md transition-all duration-300">
                                 Add to Cart

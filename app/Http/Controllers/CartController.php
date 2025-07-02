@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
@@ -12,7 +13,7 @@ class CartController extends Controller
      */
     public function viewCart()
     {
-        $cartItrems = Cart::with(['customer', 'product'])->where('customer_id', '78')->get();
+        $cartItrems = Cart::with(['customer', 'product'])->where('customer_id', '7')->get();
 
         $totalPrice = 0;
 
@@ -37,9 +38,14 @@ class CartController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function add(Product $product)
     {
-        //
+        Cart::create([
+            'customer_id' => 7, // User ID should be dynamic, this is just a placeholder
+            'product_id' => $product->id,
+        ]);
+
+        return redirect()->route('products.show', $product)->with('success', 'Item added to cart successfully.');
     }
 
     /**
