@@ -5,9 +5,8 @@
 @section('content')
     <div class="container mx-auto p-6">
         <h1 class="text-3xl font-bold text-gray-800 mb-6">Your Cart</h1>
-
-        @if ($cartItems->isEmpty())
-            <p class="text-gray-500 text-lg text-center">Your cart is empty. Start adding some items!</p>
+        @if (@isset($info))
+            <p class="text-gray-500 text-lg text-center">{{ $info }} Start adding some items!</p>
             <div class="text-center mt-6">
                 <a href="{{ route('home') }}" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg">Browse Products</a>
             </div>

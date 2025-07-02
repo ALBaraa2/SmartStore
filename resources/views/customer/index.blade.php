@@ -4,7 +4,17 @@
 
 @section('content')
     <div class="container mx-auto p-6 bg-gray-100 rounded-lg shadow">
-        <h1 class="text-3xl font-extrabold text-gray-900 mb-6 text-center">Welcome, Customer!</h1>
+        <h1 class="text-3xl font-extrabold text-gray-900 mb-6 text-center">
+            @auth
+                Welcome, {{ Auth::user()->name }}!
+            @else
+                Welcome! 
+                <a href="{{ route('login.show') }}" 
+                class="inline-block ml-2 text-gray-600 hover:underline font-semibold">
+                    Log in to buy
+                </a>
+            @endauth
+        </h1>
         <p class="text-gray-600 text-lg text-center mb-8">Discover our exclusive collection of products and find your next favorite item.</p>
 
         @if ($products->count() > 0)

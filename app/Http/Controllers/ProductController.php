@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -29,11 +30,12 @@ class ProductController extends Controller
 
     public function show(Product $product)
     {
-        $user = 7;
-        $user = User::findOrFail($user); //This is for testing purposes, replace with auth()->user() in production
-        // dd($product->id);
-        // $inCart = auth()->check() ? auth()->user()->cart->contains('product_id', $product->id) : false;
-        $inCart = $user->cartItems()->where('product_id', $product->id)->exists();
+        $inCart = $this->inCart($product);
         return view('products.show', compact('product', 'inCart'));
+    }
+
+    private function inCart(Product $product): bool
+    {
+        return auth()->check() ? auth()->user()->cartItems()->where('product_id', $product->id)->exists() : false;
     }
 }

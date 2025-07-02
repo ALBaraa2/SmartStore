@@ -13,8 +13,13 @@ class CartController extends Controller
      */
     public function viewCart()
     {
-        $cartItrems = Cart::with(['customer', 'product'])->where('customer_id', '7')->get();
+        $cartItrems = Cart::with(['customer', 'product'])->where('customer_id', auth()->user()->id)->get();
 
+        if ($cartItrems->isEmpty()) {
+            return view('customer.cart.view', [
+                'cartItems' => [],
+            ])->with('info', 'Your cart is empty.');
+        }
         $totalPrice = 0;
 
         foreach ($cartItrems as $item) {
@@ -41,7 +46,7 @@ class CartController extends Controller
     public function add(Product $product)
     {
         Cart::create([
-            'customer_id' => 7, // User ID should be dynamic, this is just a placeholder
+            'customer_id' => auth()->user()->id,
             'product_id' => $product->id,
         ]);
 
