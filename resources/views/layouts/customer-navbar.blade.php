@@ -27,6 +27,8 @@
           </div>
         </div>
       </div>
+
+      @auth
       <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
         <button type="button" class="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden">
           <span class="absolute -inset-1.5"></span>
@@ -45,19 +47,31 @@
               onclick="toggleDropdown()">
               <span class="absolute -inset-1.5"></span>
               <span class="sr-only">Open user menu</span>
-              <img class="h-8 w-8 rounded-full" 
-                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" 
-                alt="Customer Profile" />
+              <img class="h-8 w-8 rounded-full" src="{{ asset('icons/user.svg') }}" alt="Customer Profile" />
             </button>
           </div>
           <div id="profile-dropdown" 
             class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5 hidden" 
-            role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
-            <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1">Your Profile</a>
-            <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1">Settings</a>
-            <a href="{{ route('logout') }}" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1">Sign out</a>
+            role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button">
+            <a href="#" class="block px-4 py-2 text-sm text-gray-700">Your Profile</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-700">Settings</a>
+            <a href="{{ route('logout') }}" class="block px-4 py-2 text-sm text-gray-700">Sign out</a>
           </div>
         </div>
+        @endauth
+
+        @guest
+        <div class="ml-4 flex items-center space-x-3">
+            <a href="{{ route('login.show') }}"
+              class="inline-block text-sm font-medium text-gray-100 border border-white px-4 py-2 rounded-lg hover:bg-white hover:text-gray-800 transition duration-300 shadow-sm">
+                Sign In
+            </a>
+            <a href="{{ route('register.show') }}"
+              class="inline-block text-sm font-medium text-white bg-gradient-to-r from-blue-500 to-indigo-600 px-4 py-2 rounded-lg hover:from-blue-600 hover:to-indigo-700 transition duration-300 shadow-sm">
+                Register
+            </a>
+        </div>
+        @endguest
       </div>
     </div>
   </div>
