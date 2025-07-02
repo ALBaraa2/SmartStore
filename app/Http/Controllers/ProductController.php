@@ -21,7 +21,7 @@ class ProductController extends Controller
 
         $cacheKey = 'product:' . $title . ':' . ':page:' . $request->input('page', 1);
 
-        $products = Cache::remember($cacheKey, 10, function () use ($products) {
+        $products = Cache::remember($cacheKey, 3600, function () use ($products) {
             return $products->paginate(32);
         });
 
