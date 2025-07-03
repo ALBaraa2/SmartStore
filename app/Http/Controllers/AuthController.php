@@ -22,8 +22,11 @@ class AuthController extends Controller
         ]);
 
         if (Auth::attempt($validated)) {
-            // Authentication passed
-            return redirect()->intended('Home')->with('success', 'Welcome back '. Auth::user()->name . '!');
+            if (Auth::user()->role === 'admin') {
+                return redirect()->route('admin.dashboard')->with('success', 'Welcome back, Admin ' . Auth::user()->name . '!');
+            } else {
+                return redirect()->intended('Home')->with('success', 'Welcome back '. Auth::user()->name . '!');
+            }
         } else {
             // Authentication failed
             return back()->withErrors([
@@ -55,10 +58,15 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
+        $role = auth()->user()->role;
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-
-        return redirect()->route('home');
+        
+        if ($role === 'admin') {
+            return redirect()->route('login')->with('success', 'You have been logged out successfully.');
+        } else {
+            return redirect()->route('home');
+        }
     }
 }
