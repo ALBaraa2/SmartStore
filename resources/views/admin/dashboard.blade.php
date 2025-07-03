@@ -3,65 +3,29 @@
 @section('title', 'Dashboard')
 
 @section('content')
-    <h1 class="mb-4">Welcome, Admin!</h1>
+    <h1 class="text-3xl font-bold mb-6">Welcome, Admin 👋</h1>
 
-    <div class="row">
-        <div class="col-md-4">
-            <div class="card text-white bg-primary mb-4">
-                <div class="card-body">
-                    <h5 class="card-title">Manage Products</h5>
-                    <p class="card-text">Add, edit or delete supermarket items.</p>
-                    <a href="#" class="btn btn-light btn-sm">View Products</a>
-                </div>
-            </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div class="bg-white p-6 rounded-lg shadow hover:shadow-md transition">
+            <h2 class="text-lg font-semibold text-gray-700 mb-2">Total Products</h2>
+            <p class="text-3xl font-bold text-blue-600">{{ $productCount ?? 0 }}</p>
         </div>
-        <div class="col-md-4">
-            <div class="card text-white bg-success mb-4">
-                <div class="card-body">
-                    <h5 class="card-title">Manage Users</h5>
-                    <p class="card-text">View and manage customer accounts.</p>
-                    <a href="#" class="btn btn-light btn-sm">View Users</a>
-                </div>
-            </div>
+        <div class="bg-white p-6 rounded-lg shadow hover:shadow-md transition">
+            <h2 class="text-lg font-semibold text-gray-700 mb-2">Users Registered</h2>
+            <p class="text-3xl font-bold text-green-600">{{ $userCount ?? 0 }}</p>
         </div>
-        <div class="col-md-4">
-            <div class="card text-white bg-warning mb-4">
-                <div class="card-body">
-                    <h5 class="card-title">Orders</h5>
-                    <p class="card-text">Review customer orders and update status.</p>
-                    <a href="#" class="btn btn-light btn-sm">View Orders</a>
-                </div>
-            </div>
+        <div class="bg-white p-6 rounded-lg shadow hover:shadow-md transition">
+            <h2 class="text-lg font-semibold text-gray-700 mb-2">Pending Orders</h2>
+            <p class="text-3xl font-bold text-yellow-600">{{ $pendingOrders ?? 0 }}</p>
         </div>
     </div>
 
-    <hr>
-
-    <h5>Quick Stats</h5>
-    <div class="row">
-        <div class="col-md-3">
-            <div class="card border-start border-primary border-4 shadow-sm mb-4">
-                <div class="card-body">
-                    <h6 class="text-muted">Total Products</h6>
-                    <h4>{{ $productCount ?? '0' }}</h4>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card border-start border-success border-4 shadow-sm mb-4">
-                <div class="card-body">
-                    <h6 class="text-muted">Total Users</h6>
-                    <h4>{{ $userCount ?? '0' }}</h4>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card border-start border-warning border-4 shadow-sm mb-4">
-                <div class="card-body">
-                    <h6 class="text-muted">Pending Orders</h6>
-                    <h4>{{ $pendingOrders ?? '0' }}</h4>
-                </div>
-            </div>
+    <div class="bg-white p-6 rounded-lg shadow">
+        <h2 class="text-xl font-semibold mb-4">Quick Actions</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <a href="#" class="bg-blue-500 text-white text-center py-3 rounded-lg hover:bg-blue-600 transition">+ Add New Product</a>
+            <a href="#" class="bg-green-500 text-white text-center py-3 rounded-lg hover:bg-green-600 transition">View All Users</a>
+            <a href="#" class="bg-yellow-500 text-white text-center py-3 rounded-lg hover:bg-yellow-600 transition">Manage Orders</a>
         </div>
     </div>
 @endsection
