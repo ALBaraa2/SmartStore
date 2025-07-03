@@ -51,28 +51,44 @@
                     </ul>
 
                     <!-- Purchase Button -->
-                    @if ($inCart)
-                        <div class="mt-6">
-                            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg shadow-sm mb-4" role="alert">
-                                <span class="font-semibold">Great choice!</span> This product is already in your cart.
+                    @can('add-to-cart')
+                        @if ($inCart)
+                            <div class="mt-6">
+                                <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg shadow-sm mb-4" role="alert">
+                                    <span class="font-semibold">Great choice!</span> This product is already in your cart.
+                                </div>
+                                
+                                <a href="{{ route('cart.view') }}"
+                                class="inline-block w-full text-center bg-gray-500 hover:bg-green-600 text-white font-semibold py-3 rounded-lg shadow-md transition duration-300">
+                                    View Your Cart
+                                </a>
                             </div>
+                        @else
+                            <div class="mt-6">
+                                <form action="{{ route('cart.add', $product) }}" method="POST">
+                                    @csrf
+                                    <button type="submit"
+                                    class="w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 rounded-lg shadow-md transition duration-300">
+                                        Add to Cart
+                                    </button>
+                                </form>
+                            </div>
+                        @endif
+                    @endcan
 
-                            <a href="{{ route('cart.view') }}"
-                            class="inline-block w-full text-center bg-gray-500 hover:bg-green-600 text-white font-semibold py-3 rounded-lg shadow-md transition duration-300">
-                                View Your Cart
+                    @cannot('add-to-cart')
+                        <div class="mt-6">
+                            <div class="bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 py-3 rounded-lg shadow-sm mb-4" role="alert">
+                                <span class="font-semibold">Notice:</span> You need to be logged in to add products to your cart.
+                            </div>
+                            
+                            <a href="{{ route('login') }}"
+                            class="inline-flex justify-center items-center gap-2 w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg shadow-md transition duration-300">
+                                <img class="filter invert sepia saturate-500 hue-rotate-180 w-5" src="{{ asset('icons/login.png') }}" alt="Customer Profile" />
+                                Login to Add to Cart
                             </a>
                         </div>
-                    @else
-                        <div class="mt-6">
-                            <form action="{{ route('cart.add', $product) }}" method="POST">
-                                @csrf
-                                <button type="submit"
-                                        class="w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 rounded-lg shadow-md transition duration-300">
-                                    Add to Cart
-                                </button>
-                            </form>
-                        </div>
-                    @endif
+                    @endcannot
                 </div>
             </div>
 
