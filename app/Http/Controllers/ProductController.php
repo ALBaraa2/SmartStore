@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -17,7 +18,7 @@ class ProductController extends Controller
         $products = Product::whereAny([
             'name',
             'category',
-            'brand'], 'like', "%{$title}%");
+            'brand'], 'ILike', "%{$title}%");
 
         $cacheKey = 'product:' . $title . ':' . ':page:' . $request->input('page', 1);
 
@@ -25,13 +26,97 @@ class ProductController extends Controller
             return $products->paginate(32);
         });
 
-        return view('customer.index', compact('products'));
+        if (auth()->check() && auth()->user()->role === 'admin') {
+            return view('admin.products.index', compact('products'));
+        } else {
+            return view('customer.index', compact('products'));
+        }
     }
 
     public function show(Product $product)
     {
-        $inCart = $this->inCart($product);
-        return view('products.show', compact('product', 'inCart'));
+        if (auth()->check() && auth()->user()->role === 'admin') {
+            return view('admin.products.show', compact('product'));
+
+        } else {
+            $inCart = $this->inCart($product);
+            return view('products.show', compact('product', 'inCart'));
+        }
+    }
+
+    public function create()
+    {
+        if (auth()->check() && auth()->user()->role === 'admin') {
+            return view('admin.products.create');
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    }
+
+    public function store(Request $request)
+    {
+        if (auth()->check() && auth()->user()->role === 'admin') {
+            $validated = $request->validate([
+                'name' => 'required|string|max:255',
+                'description' => 'required|string',
+                'price' => 'required|numeric|min:0',
+                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'stock' => 'required|integer|min:0',
+                'category' => 'required|string|max:255',
+                'brand' => 'nullable|string|max:255',
+                'country_of_origin' => 'nullable|string|max:255',
+                'barcode' => 'nullable|string|max:255',
+                'expiry_date' => 'nullable|date',
+            ]);
+
+            if ($request->hasFile('image')) {
+                $imagePath = $request->file('image')->store('products', 'public');
+                $validated['image'] = $imagePath;
+            }
+
+            Product::create($validated);
+            return redirect()->route('admin.products.index')->with('success', 'Product created successfully.');
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    }
+
+    public function edit(Product $product) 
+    {
+        if (auth()->check() && auth()->user()->role === 'admin') {
+            return view('admin.products.edit', compact('product'));
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
+    }
+
+    public function update(Product $product, Request $request)
+    {
+        if (auth()->check() && auth()->user()->role === 'admin') {
+
+            $validated = $request->validate([
+                'name' => 'required|string|max:255',
+                'description' => 'required|string',
+                'price' => 'required|numeric|min:0',
+                'stock' => 'required|integer|min:0',
+                'category' => 'required|string|max:255',
+                'brand' => 'nullable|string|max:255',
+                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'country_of_origin' => 'nullable|string|max:255',
+                'expiry_date' => 'nullable|date',
+            ]);
+
+            // إذا في صورة، خزنها بشكل دائم
+            if ($request->hasFile('image')) {
+                $imagePath = $request->file('image')->store('products', 'public');
+                $validated['image'] = $imagePath;
+            }
+
+            $product->update($validated);
+            return redirect()->route('admin.products.show', $product)->with('success', 'Product updated successfully.');
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
     }
 
     private function inCart(Product $product): bool

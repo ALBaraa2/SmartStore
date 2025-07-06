@@ -31,4 +31,17 @@ class Product extends Model
     {
         return $this->hasMany(Cart::class);
     }
+
+    protected static function booted()
+    {
+        static::updated(
+            fn() => cache()->flush()
+        );
+        static::deleted(
+            fn() => cache()->flush()
+        );
+        static::created(
+            fn() => cache()->flush()
+        );
+    }
 }

@@ -24,7 +24,7 @@
                 @foreach ($products as $product)
                     <div class="bg-gray-200 rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow duration-200">
                         <img 
-                            src="{{ $product->image ?? 'https://via.placeholder.com/300x200.png?text=No+Image' }}" 
+                            src="{{ asset('storage/' . $product->image) }}" 
                             alt="{{ $product->name }}" 
                             class="w-full h-48 object-cover"
                         >

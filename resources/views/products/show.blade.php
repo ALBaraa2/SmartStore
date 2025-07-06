@@ -10,7 +10,7 @@
                 <!-- Product Image -->
                 <div class="relative">
                     <img 
-                        src="{{ $product->image ? asset($product->image) : asset('icons/noImage.png') }}" 
+                        src="{{ $product->image ?  asset('storage/' . $product->image) : asset('icons/noImage.png') }}" 
                         alt="{{ $product->name }}" 
                         class="rounded-xl shadow-md w-full h-auto"
                     >

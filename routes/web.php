@@ -20,8 +20,14 @@ Route::prefix('delivery')->group(function () {
     });
 });
 
-Route::prefix('admin')->group(function () {
-    Route::get('/dashboard', [UserController::class, 'adminDashboard'])->name('admin.dashboard');
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/dashboard', [UserController::class, 'adminDashboard'])->name('dashboard');
+    Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+    Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
+    Route::post('/products', [ProductController::class, 'store'])->name('products.store');
+    Route::get('/products/{product:name}', [ProductController::class, 'show'])->name('products.show');
+    Route::get('/products/{product:name}/edit', [ProductController::class, 'edit'])->name('products.edit');
+    Route::put('/products/{product:name}', [ProductController::class, 'update'])->name('products.update');
 });
 
 Route::get('/cart', [CartController::class, 'viewCart'])->name('cart.view');
