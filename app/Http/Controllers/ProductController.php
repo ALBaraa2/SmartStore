@@ -18,7 +18,7 @@ class ProductController extends Controller
         $products = Product::whereAny([
             'name',
             'category',
-            'brand'], 'ILike', "%{$title}%");
+            'brand'], 'ILike', "%{$title}%")->orderBy('updated_at', 'desc');
 
         $cacheKey = 'product:' . $title . ':' . ':page:' . $request->input('page', 1);
 
