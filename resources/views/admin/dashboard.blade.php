@@ -1,22 +1,32 @@
+@php
+    use App\Models\Product;
+    use App\Models\User;
+    use App\Models\Order;
+@endphp
+
 @extends('layouts.admin')
 
 @section('title', 'Dashboard')
 
 @section('content')
-    <h1 class="text-3xl font-bold mb-6">Welcome, Admin 👋</h1>
+    <h1 class="text-3xl font-bold mb-6">Welcome, {{ auth()->user()->name }} 👋</h1>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         <div class="bg-white p-6 rounded-lg shadow hover:shadow-md transition">
             <h2 class="text-lg font-semibold text-gray-700 mb-2">Total Products</h2>
-            <p class="text-3xl font-bold text-blue-600">{{ $productCount ?? 0 }}</p>
+            <p class="text-3xl font-bold text-blue-600">{{ Product::count() }}</p>
         </div>
         <div class="bg-white p-6 rounded-lg shadow hover:shadow-md transition">
             <h2 class="text-lg font-semibold text-gray-700 mb-2">Users Registered</h2>
-            <p class="text-3xl font-bold text-green-600">{{ $userCount ?? 0 }}</p>
+            <p class="text-3xl font-bold text-green-600">{{ User::totalCustomers() }}</p>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow hover:shadow-md transition">
+            <h2 class="text-lg font-semibold text-gray-700 mb-2">Orders Delivered</h2>
+            <p class="text-3xl font-bold text-yellow-600">{{ Order::DeliveredOrders() }}</p>
         </div>
         <div class="bg-white p-6 rounded-lg shadow hover:shadow-md transition">
             <h2 class="text-lg font-semibold text-gray-700 mb-2">Pending Orders</h2>
-            <p class="text-3xl font-bold text-yellow-600">{{ $pendingOrders ?? 0 }}</p>
+            <p class="text-3xl font-bold text-red-600">{{ Order::PendingOrders() }}</p>
         </div>
     </div>
 

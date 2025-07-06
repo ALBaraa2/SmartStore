@@ -21,9 +21,18 @@
                 <a href="{{ route('admin.dashboard') }}" class="block px-4 py-2 rounded hover:bg-gray-100 {{ request()->is('admin/dashboard') ? 'bg-gray-200 font-bold' : '' }}">
                     Dashboard
                 </a>
-                <a href="#" class="block px-4 py-2 rounded hover:bg-gray-100">
-                    Manage Products
-                </a>
+                <ul class="space-y-2">
+                    <li>
+                        <a href="#" class="block px-4 py-2 rounded hover:bg-gray-100">
+                            Manage Products
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="block px-4 py-2 rounded hover:bg-gray-100">
+                            Manage Products
+                        </a>
+                    </li>
+                </ul>
                 <a href="#" class="block px-4 py-2 rounded hover:bg-gray-100">
                     Manage Users
                 </a>

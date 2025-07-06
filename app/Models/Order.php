@@ -38,4 +38,14 @@ class Order extends Model
     {
         return $this->belongsTo(Product::class);
     }
+
+    public static function DeliveredOrders(): int
+    {
+        return self::where('status', 'delivered')->count();
+    }
+
+    public static function PendingOrders(): int
+    {
+        return self::where('status', 'in_transit')->count();
+    }
 }

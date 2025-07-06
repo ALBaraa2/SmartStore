@@ -62,4 +62,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Cart::class, 'customer_id');
     }
+
+    public static function totalCustomers(): int
+    {
+        return self::where('role', 'customer')->count();
+    }
 }
