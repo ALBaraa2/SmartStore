@@ -79,6 +79,7 @@
 
         <!-- Main Content -->
         <div class="flex-1 ml-64 p-6">
+            @include('alert')
             @yield('content')
         </div>
     </div>

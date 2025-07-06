@@ -22,12 +22,14 @@ Route::prefix('delivery')->group(function () {
 
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [UserController::class, 'adminDashboard'])->name('dashboard');
-    Route::get('/products', [ProductController::class, 'index'])->name('products.index');
-    Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
-    Route::post('/products', [ProductController::class, 'store'])->name('products.store');
-    Route::get('/products/{product:name}', [ProductController::class, 'show'])->name('products.show');
-    Route::get('/products/{product:name}/edit', [ProductController::class, 'edit'])->name('products.edit');
-    Route::put('/products/{product:name}', [ProductController::class, 'update'])->name('products.update');
+    Route::prefix('/products')->name('products.')->group(function (){
+        Route::get('/', [ProductController::class, 'index'])->name('index');
+        Route::get('/create', [ProductController::class, 'create'])->name('create');
+        Route::post('/', [ProductController::class, 'store'])->name('store');
+        Route::get('/{product:name}', [ProductController::class, 'show'])->name('show');
+        Route::get('/{product:name}/edit', [ProductController::class, 'edit'])->name('edit');
+        Route::put('/{product:name}', [ProductController::class, 'update'])->name('update');
+    });
 });
 
 Route::get('/cart', [CartController::class, 'viewCart'])->name('cart.view');
@@ -41,4 +43,4 @@ Route::post('login', [AuthController::class, 'login'])->name('login');
 Route::get('register', [AuthController::class, 'showRegisterForm'])->name('register.show');
 Route::post('register', [AuthController::class, 'register'])->name('register');
 
-Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+Route::post('logout', [AuthController::class, 'logout'])->name('logout');

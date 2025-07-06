@@ -77,10 +77,6 @@
 
         {{-- Action buttons --}}
         <div class="mt-8 flex gap-4">
-            <a href="{{ route('admin.products.index') }}" class="px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300">
-                ← Back
-            </a>
-
             <a href="{{ route('admin.products.edit', $product) }}" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
                 ✏️ Edit
             </a>
