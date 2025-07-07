@@ -34,6 +34,7 @@
                         <th class="text-left px-4 py-2">Name</th>
                         <th class="text-left px-4 py-2">Price</th>
                         <th class="text-left px-4 py-2">Stock</th>
+                        <th class="text-left px-4 py-2">Category</th>
                         <th class="text-left px-4 py-2">Brand</th>
                         <th class="text-left px-4 py-2">Actions</th>
                     </tr>
@@ -45,6 +46,7 @@
                             <td class="px-4 py-2">{{ $product->name }}</td>
                             <td class="px-4 py-2">${{ $product->price }}</td>
                             <td class="px-4 py-2">{{ $product->stock }}</td>
+                            <td class="px-4 py-2">{{ $product->category }}</td>
                             <td class="px-4 py-2">{{ $product->brand }}</td>
                             <td class="px-4 py-2">
                                 <a href="{{ route('admin.products.show', $product) }}" class="text-blue-600 hover:underline">View</a> |
