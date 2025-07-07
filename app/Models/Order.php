@@ -36,7 +36,12 @@ class Order extends Model
 
     public function product()
     {
-        return $this->belongsTo(Product::class);
+        return $this->belongsToMany(Product::class);
+    }
+
+    public function purchases()
+    {
+        return $this->hasMany(Purchase::class);
     }
 
     public static function DeliveredOrders(): int
