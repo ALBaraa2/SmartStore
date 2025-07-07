@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
@@ -22,6 +23,7 @@ Route::prefix('delivery')->group(function () {
 
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [UserController::class, 'adminDashboard'])->name('dashboard');
+
     Route::prefix('/products')->name('products.')->group(function (){
         Route::get('/', [ProductController::class, 'index'])->name('index');
         Route::get('/create', [ProductController::class, 'create'])->name('create');
@@ -30,6 +32,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/{product:name}/edit', [ProductController::class, 'edit'])->name('edit');
         Route::put('/{product:name}', [ProductController::class, 'update'])->name('update');
     });
+
+    Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
 });
 
 Route::get('/cart', [CartController::class, 'viewCart'])->name('cart.view');
