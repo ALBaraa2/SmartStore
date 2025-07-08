@@ -48,4 +48,9 @@ class Order extends Model
     {
         return self::where('status', 'in_transit')->count();
     }
+
+    public static function Quantity($orderId)
+    {
+        return Purchase::where('order_id', $orderId)->sum('quantity');
+    }
 }

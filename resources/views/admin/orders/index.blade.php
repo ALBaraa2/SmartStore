@@ -31,7 +31,7 @@
                             <td class="px-4 py-2">{{ $loop->iteration }}</td>
                             <td class="px-4 py-2">{{ $order->customer->name ?? 'N/A' }}</td>
                             <td class="px-4 py-2">{{ $order->product->name ?? 'N/A' }}</td>
-                            <td class="px-4 py-2">{{ $order->quantity }}</td>
+                            <td class="px-4 py-2">{{ $order->Quantity($order->id) }}</td>
                             <td class="px-4 py-2">${{ number_format($order->total_price, 2) }}</td>
                             <td class="px-4 py-2">
                                 <span class="inline-block px-2 py-1 text-sm rounded-full 
