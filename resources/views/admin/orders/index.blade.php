@@ -17,7 +17,7 @@
                     <tr>
                         <th class="text-left px-4 py-2">#</th>
                         <th class="text-left px-4 py-2">Customer</th>
-                        <th class="text-left px-4 py-2">Product</th>
+                        <th class="text-left px-4 py-2">Products</th>
                         <th class="text-left px-4 py-2">Qty</th>
                         <th class="text-left px-4 py-2">Total Price</th>
                         <th class="text-left px-4 py-2">Status</th>
@@ -30,7 +30,9 @@
                         <tr class="border-b">
                             <td class="px-4 py-2">{{ $loop->iteration }}</td>
                             <td class="px-4 py-2">{{ $order->customer->name ?? 'N/A' }}</td>
-                            <td class="px-4 py-2">{{ $order->product->name ?? 'N/A' }}</td>
+                            <td class="px-4 py-2">
+                                {{ $order->purchases->count() }} items
+                            </td>
                             <td class="px-4 py-2">{{ $order->Quantity($order->id) }}</td>
                             <td class="px-4 py-2">${{ number_format($order->total_price, 2) }}</td>
                             <td class="px-4 py-2">
