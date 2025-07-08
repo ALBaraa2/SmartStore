@@ -18,7 +18,7 @@ class DeliveryPersonnelFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => User::factory(),
+            'user_id' => User::where('role', 'delivery_personnel')->inRandomOrder()->first()?->id ?? User::factory()->create(['role' => 'delivery_personnel'])->id,
             'name' => $this->faker->name(),
             'number_of_orders' => $this->faker->numberBetween(0, 50),
             'status' => $this->faker->randomElement(['available', 'unavailable']),

@@ -29,7 +29,7 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'phone' => $this->faker->phoneNumber(),
             'password' => bcrypt('password'),
-            'role' => $this->faker->randomElement(['admin', 'customer', 'delivery']),
+            'role' => $this->faker->randomElement(['admin', 'customer', 'delivery_personnel']),
             'remember_token' => Str::random(10),
         ];
     }

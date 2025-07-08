@@ -23,8 +23,10 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('orders', function (Blueprint $table) {
+            if (Schema::hasColumn('orders', 'product_id')) {
             $table->foreignId('product_id')->constrained('products')->onDelete('restict');
             $table->unsignedInteger('quantity');
+            }
         });
     }
 };

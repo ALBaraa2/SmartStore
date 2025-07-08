@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\Order;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Payment>
@@ -17,11 +18,11 @@ class PaymentFactory extends Factory
     public function definition(): array
     {
         return [
-            'order_id' => \App\Models\Order::factory(),
+            'order_id' => Order::inRandomOrder()->first()?->id ?? Order::factory()->create()->id,
             'payment_method' => $this->faker->randomElement(['cash', 'credit_card', 'paypal', 'bank_transfer']),
             'payment_status' => $this->faker->randomElement(['paid', 'pending', 'failed']),
             'amount' => function (array $attributes) {
-                return \App\Models\Order::find($attributes['order_id'])->total_price;
+                return Order::find($attributes['order_id'])->total_price;
             },
         ];
     }

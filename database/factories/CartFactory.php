@@ -20,7 +20,7 @@ class CartFactory extends Factory
     public function definition(): array
     {
         return [
-            'customer_id' => User::factory()->create(['role' => 'customer'])->id,
+            'customer_id' => User::where('role', 'customer')->inRandomOrder()->first()?->id ?? User::factory()->create(['role' => 'customer'])->id,
             'product_id' => Product::factory()->create()->id,
         ];
     }
