@@ -44,7 +44,7 @@
                                     {{ ucfirst($order->status) }}
                                 </span>
                             </td>
-                            <td class="px-4 py-2">{{ $order->deliveryPersonnel->name ?? 'N/A' }}</td>
+                            <td class="px-4 py-2">{{ $order->deliveryPersonnel->user->name ?? 'N/A' }}</td>
                             <td class="px-4 py-2 text-sm text-gray-600">{{ $order->created_at->format('Y-m-d H:i') }}</td>
                         </tr>
                     @empty
