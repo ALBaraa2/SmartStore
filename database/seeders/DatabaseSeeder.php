@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
         Product::factory(20)->create();
 
         // Generate Delivery Personnel
-        DeliveryPersonnel::factory(1)->create();
+        DeliveryPersonnel::factory(5)->create();
 
         Order::factory(20)->create()->each(function ($order) {
             $total = 0;

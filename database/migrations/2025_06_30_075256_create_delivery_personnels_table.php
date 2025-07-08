@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('delivery_personnels', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('restrict');
-            $table->string('name'); // Name of the delivery personnel
             $table->unsignedInteger('number_of_orders')->default(0); // Number of orders assigned to the delivery personnel
             $table->enum('status', ['available', 'unavailable'])->default('available');
             $table->unsignedInteger('rate')->default(0.00); // Rate for the delivery personnel
