@@ -22,11 +22,6 @@ class Product extends Model
         'expiry_date'
     ];
 
-    public function orders()
-    {
-        return $this->hasMany(Order::class);
-    }
-
     public function purchases()
     {
         return $this->hasMany(Purchase::class);
