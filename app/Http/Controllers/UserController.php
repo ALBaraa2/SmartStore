@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class UserController extends Controller
 {
@@ -15,5 +16,12 @@ class UserController extends Controller
 
         // If not an admin, redirect to home with an error message
         return redirect()->route('home')->with('error', 'You do not have access to the admin dashboard.');
+    }
+
+    public function index()
+    {
+        $users = User::latest()->paginate(50);
+
+        return view('admin.users.index', compact('users'));
     }
 }

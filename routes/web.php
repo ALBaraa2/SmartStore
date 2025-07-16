@@ -34,6 +34,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
     });
 
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+
+    Route::get('/users', [UserController::class, 'index'])->name('users.index');
 });
 
 Route::get('/cart', [CartController::class, 'viewCart'])->name('cart.view');
