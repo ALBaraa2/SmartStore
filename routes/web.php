@@ -36,8 +36,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
 
     Route::get('/users', [UserController::class, 'index'])->name('users.index');
+    Route::get('/users/{user:name}', [UserController::class, 'show'])->name('users.show');
 
-    Route::put('/users/{user}/update-role', [UserController::class, 'updateRole'])->name('users.updateRole');
+    Route::patch('/admin/users/{user:name}/role', [UserController::class, 'updateRole'])->name('users.updateRole');
 
 });
 

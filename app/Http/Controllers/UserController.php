@@ -46,4 +46,9 @@ class UserController extends Controller
 
         return redirect()->route('admin.users.index')->with('success', 'User role updated successfully.');
     }
+
+    public function show(User $user)
+    {
+        return view('admin.users.show', compact('user'));
+    }
 }

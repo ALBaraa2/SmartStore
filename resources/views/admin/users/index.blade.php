@@ -6,7 +6,7 @@
     <div class="container mx-auto">
         <div class="flex items-center justify-between mb-6">
             <div class="flex items-center gap-2">
-                <img src="{{ asset('icons/user.svg') }}" alt="Users Icon" class="w-8 h-8">
+                <img src="{{ asset('icons/users.png') }}" alt="Users Icon" class="w-8 h-8">
                 <a href="{{ route('admin.users.index') }}" class="text-2xl font-bold">All Users</a>
             </div>
         </div>
@@ -48,8 +48,8 @@
                             <td class="px-4 py-2">{{ $user->phone }}</td><td class="px-4 py-2">
                                 <span class="inline-block px-2 py-1 text-sm rounded-full 
                                     @if($user->role === 'admin') bg-green-100 text-green-700
-                                    @elseif($user->role === 'customer') bg-gray-100 text-gray-700
-                                    @elseif($user->role === 'delivery_personnel') bg-blue-100 text-blue-700
+                                    @elseif($user->role === 'customer') bg-blue-100 text-blue-700
+                                    @elseif($user->role === 'delivery_personnel') bg-yellow-100 text-yellow-700
                                     @else bg-gray-100 text-gray-700
                                     @endif">
                                     {{ ucfirst($user->role) }}
@@ -57,7 +57,7 @@
                             </td>
                             <td class="px-4 py-2 text-sm text-gray-600">{{ $user->created_at->format('Y-m-d') }}</td>
                             <td class="px-4 py-2">
-                                <a href="#" class="text-blue-600 hover:underline text-sm">View</a>
+                                <a href="{{ route('admin.users.show', $user) }}" class="text-blue-600 hover:underline text-sm">View</a>
                             </td>
                         </tr>
                     @empty
