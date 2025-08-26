@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
     public function adminDashboard()
     {
         // Check if the user is authenticated and is an admin
-        if (auth()->check() && auth()->user()->role === 'admin') {
+        if (Auth::check() && Auth::user()->role === 'admin') {
             return view('admin.dashboard');
         }
 
@@ -39,7 +40,7 @@ class UserController extends Controller
         $request->validate([
             'role' => 'required|in:admin,customer,delivery_personnel',
         ]);
-        
+
         // Update the user's role
         $user->role = $request->input('role');
         $user->save();

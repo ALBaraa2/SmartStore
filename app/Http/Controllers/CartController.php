@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cart;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
@@ -13,10 +14,10 @@ class CartController extends Controller
      */
     public function viewCart()
     {
-        if (!auth()->check()) {
+        if (!Auth::check()) {
             return view('customer.cart.view')->with('error', 'Please log in to add items to your cart.');
         } else {
-            $cartItrems = Cart::with(['customer', 'product'])->where('customer_id', auth()->user()->id)->get();
+            $cartItrems = Cart::with(['customer', 'product'])->where('customer_id', Auth::user()->id)->get();
 
             if ($cartItrems->isEmpty()) {
                 return view('customer.cart.view', [
@@ -50,7 +51,7 @@ class CartController extends Controller
     public function add(Product $product)
     {
         Cart::create([
-            'customer_id' => auth()->user()->id,
+            'customer_id' => Auth::user()->id,
             'product_id' => $product->id,
         ]);
 

@@ -43,10 +43,15 @@
                     @forelse ($users as $user)
                         <tr class="border-b hover:bg-gray-50">
                             <td class="px-4 py-2">{{ $loop->iteration }}</td>
-                            <td class="px-4 py-2">{{ $user->name }}</td>
+                            <td class="px-4 py-2">
+                                {{ $user->name }}
+                                @if(auth()->id() === $user->id)
+                                    <span class="text-xs text-red-500 font-semibold">(me)</span>
+                                @endif
+                            </td>
                             <td class="px-4 py-2">{{ $user->email }}</td>
                             <td class="px-4 py-2">{{ $user->phone }}</td><td class="px-4 py-2">
-                                <span class="inline-block px-2 py-1 text-sm rounded-full 
+                                <span class="inline-block px-2 py-1 text-sm rounded-full
                                     @if($user->role === 'admin') bg-green-100 text-green-700
                                     @elseif($user->role === 'customer') bg-blue-100 text-blue-700
                                     @elseif($user->role === 'delivery_personnel') bg-yellow-100 text-yellow-700
