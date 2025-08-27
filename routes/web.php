@@ -5,6 +5,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\SettingController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -39,6 +40,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/users/{user:name}', [UserController::class, 'show'])->name('users.show');
 
     Route::patch('/admin/users/{user:name}/role', [UserController::class, 'updateRole'])->name('users.updateRole');
+
+    Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
+    Route::post('/settings/{section}', [SettingController::class, 'update'])->name('settings.update');
 
 });
 

@@ -9,7 +9,7 @@
                 <img src="{{ asset('icons/product.png') }}" alt="Product Icon" class="w-8 h-8">
                 <h1 class="text-2xl font-bold">All Products</h1>
             </div>
-            <a href="{{ route('admin.products.create') }}" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+            <a href="{{ route('admin.products.create') }}" class="px-6 py-2 rounded-xl bg-blue-600 text-white font-medium shadow hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 transition">
                 + Add Product
             </a>
         </div>
